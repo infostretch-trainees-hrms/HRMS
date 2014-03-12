@@ -3,10 +3,11 @@ var app      = express();
 var mysql = require('mysql');
 var file = require('fs');
 var connection = mysql.createConnection(
-    { host: 'mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/',
+    { host: '127.12.239.130',
         user: 'adminQxRxAq7',
         password: 'vtZCGvSKpN_n',
-        database: 'openhrms'
+        database: 'openhrms',
+        port:'3306'
     });
 //ishant
 connection.connect();
