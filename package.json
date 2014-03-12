@@ -1,4 +1,4 @@
 "scripts": {
-  "start": "node server.js"
+  "start": "node HRMS_Mobile_HTML_11_03_2014(most recent)/server/server.js"
 },
 "main": "server.js"
