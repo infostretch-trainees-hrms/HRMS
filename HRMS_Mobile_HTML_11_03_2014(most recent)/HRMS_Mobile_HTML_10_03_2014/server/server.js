@@ -6,7 +6,7 @@ var connection = mysql.createConnection(
     { host: '127.12.239.130',
         user: 'adminQxRxAq7',
         password: 'vtZCGvSKpN_n',
-        database: 'openhrms',
+        database: 'nodejs',
         port:'3306'
     });
 //ishant
