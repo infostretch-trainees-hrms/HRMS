@@ -1,0 +1,268 @@
+<div id="wrapper">
+
+<aside class="pushy pushy-left">
+    <h2>Quick Links</h2>
+    <ul class="list-normal">
+        <li><a href="#/home" class="shwoleft">Home</a></li>
+        <li><a href="#/contacts" class="shwoleft">Contacts</a></li>
+        <li class="active-link"><a href=""><strong>Leave</strong></a></li>
+        <li><a href="#/travel" class="shwoleft">Travel</a></li>
+        <li><a href="#/training" class="shwoleft">Training</a></li>
+        <li><a href="#/jira" class="shwoleft">JIRA</a></li>
+        <li><a href="#" class="shwoleft" ng-click="logout()">Logout</a></li>
+    </ul>
+</aside>
+
+<div class="site-overlay"></div>
+
+<div id="innerWrapper">
+
+<header>
+    <div class="content">
+        <a class="menu-btn icons icon-area icon-bars float-lt shwoleft"></a>
+
+        <h1>Leave Balance</h1>
+    </div>
+</header>
+<section class="container">
+
+<div class="content tab-container no-padding-all" ng-controller="leaveCtrl">
+<ul class="tabs">
+    <li class="tab-link one-third-nm ng-class:current2" data-tab="tab-content-2" ng-click="clickLeaveList()">My Leave
+        list
+    </li>
+    <li class="tab-link one-third-nm ng-class:adminDisabled" data-tab="tab-content-3">
+        Apply Leave
+    </li>
+    <li class="tab-link one-third-nm last-column ng-class:disabled" data-tab="tab-content-1">Summary</li>
+</ul>
+
+<div id="tab-content-1" class="tab-content no-padding-all ng-class:current1" ng-controller="leaveSummaryCtrl">
+    <!-- Summary--->
+    <!---Search -->
+    <div class="padding-10">
+        <div class="contentform">
+            <div class="contentform-inr">
+                <div class="row">
+                    <label for="leave_period">Leave Period *</label>
+                    <select id="leave_period" class="inputbox" ng-model="leaveSummaryForm.leave_period">
+                        <option ng-repeat="evt in leave_period" value="{{evt.leave_period_id}}">{{evt.leave_period}}
+                        </option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label for="type">Type of leave *</label>
+                    <select id="type" class="inputbox" ng-model="leaveSummaryForm.leaveType">
+                        <option value="All">All</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Comp Off">Comp Off</option>
+                        <option value="LWP">LWP</option>
+                        <option value="Floating">Floating</option>
+                        <option value="Maternity">Maternity</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <button class="button orange radius" ng-click="searchLeaveSummary()">Search</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <ul class="list-normal list-contact">
+        <li ng-repeat="evt in leaveSummaryResult">
+            <a ng-click="clickToggle($index)" class="list-header ng-class:rotate[$index]"><h3>{{evt.emp_fullname}}</h3></a>
+
+            <div ng-show="toggle[$index]" class="height-fix-2 content-info animate-hide">
+                <label>Leaves brought forward : {{evt.leave_brought_forward}}</label>
+                <label>Current Leave Balance : {{evt.no_of_days_allotted-(evt.leave_brought_forward+evt.leave_taken)}}</label>
+                <label>Leaves taken : {{evt.leave_taken}}</label>
+                <label>Leave type : {{evt.leave_type_name}}</label>
+            </div>
+        </li>
+    </ul>
+    <label class="no-records" ng-show="!leaveSummaryResult.length && firsttime">No records</label>
+</div>
+<!--Leave Summary Tab-->
+<div id="tab-content-2" class="tab-content current no-padding-all ng-class:current2" ng-controller="myLeaveListCtrl">
+    <ul class="inr-tabs valign-midd">
+        <li class="tab-link ng-class:[disabled, current4]" data-tab="tab-content-4" ng-click="loadLeaveGrantList()">
+            Grant Request
+        </li>
+        <li class="tab-link ng-class:[adminDisabled, current5]" data-tab="tab-content-5" ng-click="loadMyLeaveList()">My
+            Leave List
+        </li>
+    </ul>
+    <div class="clear"></div>
+    <div id="tab-content-5" class="tab-content inr-tab-content no-padding-all ng-class:current5">
+        <!--My Leave List inner tab-->
+        <div class="preloader">
+            <div class="status">
+                <p class="txt-center">Loading My Leave List Content...</p>
+            </div>
+        </div>
+        <div class="padding-10">
+            <!--All -->
+            <div class="contentform">
+                <div class="contentform-inr">
+                    <div class="row">
+                        <label>Leave Type *</label>
+                        <select class="inputbox" ng-model="leaveType">
+                            <option value="All">All</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Comp Off">Comp Off</option>
+                            <option value="LWP">LWP</option>
+                            <option value="Floating">Floating</option>
+                            <option value="Maternity">Maternity</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label>Leave Status *</label>
+                        <select class="inputbox" ng-model="leaveStatus">
+                            <option value="All">All</option>
+                            <option value="0" style="color:#0059bc">Pending</option>
+                            <option value="1" class="text-green-dark">Approved</option>
+                            <option value="2" style="color:orangered">Rejected</option>
+                            <option value="3" style="color: #000000">Cancelled</option>
+                            <option value="4">Taken</option>
+                        </select>
+                    </div>
+                    <div class="row" ng-cloak>
+                        <label>From *</label>
+
+                        <div class="dateWrapper"><input type="text" class="datepicker datepickerStart1"
+                                                        placeholder="dd-mm-yy"
+                                                        readonly="true"
+                                                        ng-model="startDate">
+                        </div>
+                    </div>
+                    <div class="row" ng-cloak>
+                        <label>To *</label>
+
+                        <div class="dateWrapper"><input type="text" class="datepicker datepickerEnd1"
+                                                        placeholder="dd-mm-yy"
+                                                        readonly="true"
+                                                        ng-model="endDate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="list-normal list-leave">
+            <li class="no-margin-all leave-info"
+                ng-repeat="leave in filteredList = (myLeavelist | searchForLeaveDate:startDate:endDate | searchForLeave:leaveType | sortDI | parseStatus:leaveStatus)">
+                <div ng-show="leave.leave_status==0" class="cancel-float" ng-click="cancelPending(leave.leave_id)">
+                    Cancel
+                </div>
+                <h3>{{leave.leave_date}}</h3>
+                <label>Type of Leave :{{leave.leave_type_name}}</label>
+                <label ng-show="leave.leave_status==0">Status : <strong
+                        style="color:#0059bc">Pending</strong>
+
+                </label>
+                <label ng-show="leave.leave_status==1">Status : <strong
+                        class="text-green-dark">Approved</strong></label>
+                <label ng-show="leave.leave_status==2">Status : <strong
+                        style="color:orangered">Rejected</strong></label>
+                <label ng-show="leave.leave_status==3">Status : <strong
+                        style="color: #000000">Cancelled</strong></label>
+                <label ng-show="leave.leave_status==4">Status : <strong>Taken</strong></label>
+                <label ng-show="leave.leave_length_hours==8">Half day? : No</label>
+                <label ng-show="leave.leave_length_hours==4">Half day? : Yes</label>
+                <label>Comments : {{leave.leave_comments}}</label>
+
+            </li>
+        </ul>
+        <label class="no-records" ng-show="!filteredList.length">No records</label>
+
+
+    </div>
+    <div id="tab-content-4" class="tab-content inr-tab-content no-padding-all ng-class:current4">
+        <!--grant request inner tab-->
+        <div class="preloader">
+            <div class="status">
+                <p class="txt-center">Loading grant requests...</p>
+            </div>
+        </div>
+        <label class="no-records" ng-show="leaveGrantList.length==0">No records</label>
+        <ul class="list-normal list-contact">
+
+            <li ng-repeat="evt1 in leaveGrantList[1]">
+                <a ng-click="clickToggle($index)" class="list-header ng-class:rotate[$index]"><h3>{{evt1.emp_fullname_grant}}</h3></a>
+                <div ng-show="evt1.emp_fullname_grant==evt.emp_fullname && toggle[$parent.$index]" class="height-fix-1 content-info animate-hide" ng-repeat="evt in leaveGrantList[0]">
+                        <label>Leave Date: {{evt.leave_date}}</label>
+                        <label>Type of leave: {{evt.leave_type_name}}</label>
+                        <label ng-show="evt.leave_length_days==1">half day?: no</label>
+                        <label ng-show="evt.leave_length_days==0.5">half day?: yes</label>
+                        <label>Comments: {{evt.leave_comments}}</label>
+                        <button class="button" ng-click="grantLeave(evt.leave_id)">Grant</button>
+                        <button class="button" ng-click="rejectLeave(evt.leave_id)">Reject</button>
+                </div>
+            </li>
+        </ul>
+
+
+    </div>
+</div>
+<!--My Leave List Tab-->
+<div id="tab-content-3" class="tab-content ng-class:current3" ng-controller="leaveRequestCtrl"> <!--Apply leave Tab-->
+    <div class="preloader">
+        <div class="status">
+            <p class="txt-center">Sending Leaving Request...</p>
+        </div>
+    </div>
+    <div ng-repeat="evt in leave_balance">
+    <p ng-show="evt.leave_type_name==leaveType">You have <span class="text-orange">{{evt.current_leave_balance}} {{evt.leave_type_name}} Leaves</span>.</p>
+    </div>
+    <div class="contentform">
+        <div class="contentform-inr">
+            <div class="row">
+                <label for="fromDate">From Date *</label>
+
+                <div class="dateWrapper"><input type="text" class="datepicker datepickerStart"
+                                                placeholder="dd-mm-yy" id="fromDate"
+                                                readonly="true"
+                                                ng-model="fromDate">
+                </div>
+            </div>
+            <div class="row">
+                <label for="toDate">To Date *</label>
+
+                <div class="dateWrapper"><input type="text" class="datepicker datepickerEnd"
+                                                placeholder="dd-mm-yy" id="toDate"
+                                                readonly="true"
+                                                ng-model="toDate">
+                </div>
+            </div>
+            <div class="row">
+                <label for="applytype">Leave Type *</label>
+                <select id="applytype" class="inputbox" ng-model="leaveType">
+                    <option value="Paid">Paid</option>
+                    <option value="Comp Off">Comp Off</option>
+                    <option value="LWP">LWP</option>
+                    <option value="Floating">Floating</option>
+                    <option value="Maternity">Maternity</option>
+                </select>
+            </div>
+            <div class="row">
+                <label> Half day? </label>
+                <input type="checkbox" id="half" ng-model="half_day" value=false>
+            </div>
+            <div class="row">
+                <label for="comments">Comments</label>
+                <textarea id="comments" placeholder="comments goes here" ng-model="comments"></textarea>
+            </div>
+            <div class="raw">
+                <button class="button orange radius" ng-click="leaveApply()">Apply Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Apply Leave Tab-->
+</div>
+</section>
+</div>
+</div>
+<script type="text/javascript" src="js/pushy.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+
+

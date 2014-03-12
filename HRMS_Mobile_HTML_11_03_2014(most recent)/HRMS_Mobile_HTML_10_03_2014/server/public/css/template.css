@@ -1,0 +1,310 @@
+/* -------------------------------------------------- 
+Project Name		: HRMS
+Project Type		: Mobile Version
+File Type			: CSS
+File Name			: template.css
+Created Date		: 22 Jan 2014
+Created by			: Kamlesh Chauhan
+-----------------------------------------------------*/
+
+header,
+header:before,
+header:after,
+footer,
+footer:before,
+footer:after
+ {
+  display: block;
+  line-height: 0;
+  content: "";
+}
+
+header:after,
+footer:after
+ {
+  clear: both;
+}
+
+
+/* --------------------------------------------------
+   :: Inner Wrapper
+-------------------------------------------------- */
+/*
+#wrapper #innerWrapper,
+#wrapper aside {display:block; min-height:100%; height:100% !important; position:relative;}
+
+#wrapper #innerWrapper{width:100%;}*/
+
+
+
+/* Menu Appearance */
+
+.pushy{
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    top: 0;
+    z-index: 9999;
+    background: #f8a844;
+
+    -webkit-box-shadow: inset -7px 0 6px -9px rgba(0, 0, 0, .7);
+    -moz-box-shadow: inset -7px 0 6px -9px rgba(0, 0, 0, .7);
+    box-shadow: inset -7px 0 6px -9px rgba(0, 0, 0, .7);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
+}
+
+
+.pushy h2 { font-size:14px; color:#000; height:43px; line-height:43px; padding-left:20px;}
+
+.pushy ul li{ margin:0px; padding:0px;}
+
+.pushy a{
+    display: block;
+    color: #fff;
+    margin:0px;
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    text-decoration: none;
+
+    font-weight:400;
+}
+
+.pushy a:hover,
+.pushy ul li.active-link a{
+    background: #fff;
+    color: #000;
+}
+
+
+/* Menu Movement */
+
+.pushy-left{
+    -webkit-transform: translate3d(-200px,0,0);
+    -moz-transform: translate3d(-200px,0,0);
+    -ms-transform: translate3d(-200px,0,0);
+    -o-transform: translate3d(-200px,0,0);
+    transform: translate3d(-200px,0,0);
+}
+
+.pushy-open{
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+.container-push, .push-push{
+    -webkit-transform: translate3d(200px,0,0);
+    -moz-transform: translate3d(200px,0,0);
+    -ms-transform: translate3d(200px,0,0);
+    -o-transform: translate3d(200px,0,0);
+    transform: translate3d(200px,0,0);
+}
+
+/* Menu Transitions */
+
+.pushy, #innerWrapper, .push{
+    -webkit-transition: -webkit-transform .2s cubic-bezier(.16, .68, .43, .99);
+    -moz-transition: -moz-transform .2s cubic-bezier(.16, .68, .43, .99);
+    -o-transition: -o-transform .2s cubic-bezier(.16, .68, .43, .99);
+    transition: transform .2s cubic-bezier(.16, .68, .43, .99);
+    /* improves performance issues on mobile*/
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+}
+
+/* Site Overlay */
+
+.site-overlay{
+    display: none;
+}
+
+.pushy-active .site-overlay{
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 200px;
+    z-index: 9999;
+}
+
+#innerWrapper{ position: relative; height:100%;}
+
+
+/* --------------------------------------------------
+   :: Header
+-------------------------------------------------- */
+header{
+	
+	background: #fdf9f4;	
+	
+	/*-webkit-box-shadow: 2px 0 3px 2px #d4d4d4;
+	-moz-box-shadow: 2px 0 3px 2px #d4d4d4;
+	box-shadow: 2px 0 3px 2px #d4d4d4;*/
+	/*margin-bottom:15px;*/
+	
+}
+
+	header .content { padding:10px;}
+
+	header h1,	h1#logo a,	h1 a.minTitle {text-align:center !important; padding:0px; margin:0 auto !important; width:70%; display:block;  color: #f89921; text-decoration:none;}
+	
+
+	
+	.menu-btn {display:block; width:25px; height:25px; margin:0 5px;  cursor:pointer}
+
+	
+	
+/* --------------------------------------------------
+   :: Middle Area
+-------------------------------------------------- */
+.container {
+    background: #fdf9f4;
+    height: -moz-calc(100% - 45px);
+    height: -webkit-calc(100% - 45px);
+    height: calc(100% - 45px);
+    height: 93%;
+}
+
+
+/* --------------------------------------------------
+   :: Footer
+-------------------------------------------------- */
+
+
+/* --------------------------------------------------
+   :: Content Form
+-------------------------------------------------- */
+.contentform { border:1px solid #d8d8d8; background:#f1f1f1; padding:10px;}
+.contentform-inr {border:1px solid #e5e5e5; background:#fff; padding:10px;}
+
+.contentform .row { margin-bottom:10px;}
+.contentform label{color:#747474; float:left;  width: 230px;}
+.contentform input, .contentform textarea, .contentform select{ width:250px; float:left;}
+
+.contentform button {position:relative; left:100px;}
+
+
+/* --------------------------------------------------
+   :: Tab Container
+-------------------------------------------------- */
+.tab-container { position:relative; top:0px;
+    background: rgb(253,249,244);}
+
+/* --------------------------------------------------
+   :: List Training
+-------------------------------------------------- */
+ul.list-training li:first-child{border-top:1px solid #dcdcdc;}
+
+ul.list-training li{border-bottom:1px solid #dcdcdc; margin:0px;}
+
+ul.list-training li a {
+    padding: 10px 40px 10px 10px;
+    display: block;
+    background: white;
+    border-left: 4px solid orange;
+}
+
+ul.list-training li a:hover {
+    text-decoration: none;
+    background-color: #f6f6f6;
+}
+
+ul.list-training li div a {
+    height: 40px;
+    background: #fdf9f4 url(../images/icon_arrow_down.png) 98% center no-repeat;
+    border-top: 1px solid lightgrey;
+    border-left:none;
+
+}
+ul.list-training li div a:hover {
+    text-decoration: none;
+    background-color: #f6f6f6;
+}
+ul.list-training h3{ white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis; font-size:14px;}
+ul.list-training h3,ul.list-training p{ margin-bottom:0; }
+ul.list-training p:last-child {margin-bottom:0;}
+
+.content-info {
+    padding: 10px;
+    height: 140px;
+    background: #fff;
+    border-top: 1px dashed orange;
+
+}
+.special{
+    border-bottom: 1px dashed orange !important;
+}
+
+.height-fix-1{
+    height: 130px ;
+}
+
+.height-fix-2{
+    height: 100px;
+}
+
+/* --------------------------------------------------
+   :: Contacts
+-------------------------------------------------- */
+.search-button{
+    left: 0 !important;
+    float: left;
+    padding-left: 0;
+    padding-right: 0;
+    width: 30px;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+    height: 30px;
+    background: orange url(../images/icon_search.png) no-repeat;
+}
+.search-text{
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.adv {
+    width: 100%;
+    font-size: small;
+    background: url(../images/line.png) repeat-x;
+}
+
+.leave-info {
+    padding: 10px;
+    height: auto;
+    background: #fff;
+    border-top: 1px solid lightgrey;
+    border-left: 4px solid #f89921;
+}
+.leave-info:last-child {
+    border-bottom: 1px solid lightgrey;
+}
+
+.cancel-float {
+    position: relative;
+    float: right;
+    height: 30px;
+    width: 60px;
+    background-color: #f89921;
+    color: white;
+    border-radius: 2px;
+    text-align: center;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.list-date {
+    float: right;
+}
+
+.list-title {
+    float: left;
+    width: 65%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

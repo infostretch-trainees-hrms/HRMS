@@ -1,0 +1,108 @@
+<div id="wrapper">
+    <aside class="pushy pushy-left">
+        <h2>Quick Links</h2>
+        <ul class="list-normal">
+            <li><a href="#/home" class="shwoleft">Home</a></li>
+            <li class="active-link"><a href=""><strong>Contacts</strong></a></li>
+            <li><a href="#/leave" class="shwoleft">Leave</a></li>
+            <li><a href="#/travel" class="shwoleft">Travel</a></li>
+            <li><a href="#/training" class="shwoleft">Training</a></li>
+            <li><a href="#/jira" class="shwoleft">JIRA</a></li>
+            <li><a href="#" class="shwoleft" ng-click="logout()">Logout</a></li>
+        </ul>
+    </aside>
+
+    <div class="site-overlay"></div>
+    <div id="innerWrapper">
+
+        <header>
+            <div class="content">
+                <a class="menu-btn icons icon-area icon-bars float-lt shwoleft"></a>
+                <h1>Contacts</h1>
+            </div>
+        </header>
+
+        <section class="container" ng-controller="contactsCtrl">
+            <div class="content tab-container no-padding-all">
+                <div id="tab-content-1" class="tab-content tab-content-full current">
+                    <div class="preloader">
+                        <div class="status">
+                            <p class="txt-center">Loading Contacts Content...</p>
+                        </div>
+                    </div>
+                    <div class="padding-10">
+                        <div class="contentform">
+                            <div class="contentform-inr">
+                                <div class="row">
+                                    <input class="search-text"type="text" id="EName" placeholder="Search by Name or part of Name"
+                                           ng-model="searchString">
+                                    <button class="search-button orange search-radius" ng-click="searchContacts()"></button>
+                                </div>
+                                <div style="height: 1px; border-top: #d9a300 1px dashed; ;margin-bottom: 15px; text-indent: 20px">
+                             <span ng-click="toggle_adv=!toggle_adv" class="text-orange-light "
+                                   style="background-color: white; position: relative; top: -0.7em; cursor: pointer;">
+                                            &nbspAdvanced Search&nbsp
+                                         </span>
+                                </div>
+                                <div ng-show="toggle_adv" class="animate-hide">
+                                    <div class="row">
+                                        <label for="dept">Department</label>
+                                        <select id="dept" class="inputbox" ng-model="contactsSearch.department">
+                                            <option value="all" selected>all</option>
+                                            <option value="{{dept.title}}" ng-repeat="dept in all_department">
+                                                {{dept.title}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <label for="designation">Designation</label>
+                                        <select id="designation" class="inputbox" ng-model="contactsSearch.designation">
+                                            <option value="all" selected>all</option>
+                                            <option value="{{desig.title}}" ng-repeat="desig in all_designation">
+                                                {{desig.title}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <label for="loc">Location</label>
+                                        <select id="loc" class="inputbox" ng-model="contactsSearch.location">
+                                            <option value="all" selected>all</option>
+                                            <option value="{{loc.name}}" ng-repeat="loc in all_location">{{loc.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="list-normal list-contact">
+                        <li ng-repeat="res in filteredList = (contactsSearchResult | searchFor:searchString)">
+                            <a ng-click="clickToggle($index)" class="list-header ng-class:rotate[$index]"><h3>{{res.employee_name}}</h3></a>
+                            <div ng-show="toggle[$index]" class="contact-info animate-hide">
+                                <img ng-src="{{res.epic_picture}}"/>
+                                <div>
+                                    <label><i>Department:</i> {{res.emp_department}}</label>
+                                    <label><i>Designation:</i> {{res.emp_designation}}</label>
+                                    <label><i>Home Telephone:</i> {{res.emp_hm_telephone}}</label>
+                                    <label><i>Work Telephone:</i> {{res.emp_work_telephone}}</label>
+                                    <label><i>Mobile:</i> {{res.emp_mobile}}</label>
+                                    <label><i>Email:</i> {{res.emp_work_email}}</label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <label class="no-records" ng-show="!filteredList.length && firsttime">No Records</label>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+</div>
+
+<!-- Pushy JS -->
+<script src="js/pushy.js"></script>
+<!-- <script src="js/custom.js"></script>-->
+
+

@@ -1,0 +1,25 @@
+
+
+<div id="wrapper">
+    <div id="login-container">
+
+        <h1 id="logo-login"><img src="images/logo-login.png" alt="HRMS" ></h1>
+        <div class="loginbox">
+
+            <div class="row">
+                <label>Username</label>
+                <div class="inputarea user"><input type="text" name="username" class="inputbox" ng-model="formData.username"></div>
+            </div>
+
+            <div class="row">
+                <label>Password</label>
+                <div class="inputarea password"><input type="password" name="password" class="inputbox" ng-model="formData.password"></div>
+            </div>
+
+            <div class="row buttonarea">
+                <input type="button" class="log-button" ng-click="loginCheck()" value="login">
+            </div>
+        </div>
+    </div>
+
+</div>

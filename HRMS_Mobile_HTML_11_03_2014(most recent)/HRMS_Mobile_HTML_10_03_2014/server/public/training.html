@@ -1,0 +1,264 @@
+<div id="wrapper">
+<aside class="pushy pushy-left">
+    <h2>Quick Links</h2>
+    <ul class="list-normal">
+        <li><a href="#/home" class="shwoleft">Home</a></li>
+        <li><a href="#/contacts" class="shwoleft">Contacts</a></li>
+        <li><a href="#/leave" class="shwoleft">Leave</a></li>
+        <li><a href="#/travel" class="shwoleft">Travel</a></li>
+        <li class="active-link"><a href=""><strong>Training</strong></a></li>
+        <li><a href="#/jira" class="shwoleft">JIRA</a></li>
+        <li><a href="#" class="shwoleft" ng-click="logout()">Logout</a></li>
+    </ul>
+</aside>
+
+<div class="site-overlay"></div>
+
+<div id="innerWrapper">
+
+<header>
+    <div class="content">
+        <a class="menu-btn icons icon-area icon-bars float-lt shwoleft"></a>
+
+        <h1>Training</h1>
+    </div>
+</header>
+<section class="container" ng-controller="trainingCtrl">
+<div class="content tab-container no-padding-all">
+<div class="tab-container">
+<ul class="tabs">
+    <li class="tab-link one-half current" data-tab="tab-content-1" onclick="$(this).loadCalendar()">Calender</li>
+    <li class="tab-link one-half last-column" ng-click="clickCourses()" ng-hide="isAdmin" data-tab="tab-content-2">
+        My
+        Courses
+    </li>
+    <li class="tab-link one-half last-column" id="tab" ng-click="loadAddTraining()" ng-show="isAdmin"
+        data-tab="tab-content-3">
+        Add Training
+
+    </li>
+</ul>
+<div id="tab-content-1" class="tab-content current">
+    <div class="custom-calendar-wrap custom-calendar-full">
+        <div class="preloader">
+            <div class="status">
+                <p class="txt-center">Loading Training Calendar...</p>
+            </div>
+        </div>
+        <div class="custom-header clearfix">
+            <nav>
+                <span id="custom-prev" class="custom-prev"></span>
+                <span id="custom-next" class="custom-next"></span>
+            </nav>
+            <h3 class="custom-month-year">
+                <span id="custom-month" class="custom-month"></span>
+                <span id="custom-year" class="custom-year"></span>
+
+            </h3>
+        </div>
+        <div id="calendar" class="fc-calendar-container"></div>
+    </div>
+
+</div>
+<div id="tab-content-2" class="tab-content no-padding-all">
+    <div class="tab-content inr-tab-content inr-current no-padding-all">
+        <div class="preloader">
+            <div class="status">
+                <p class="txt-center">Loading Home Content...</p>
+            </div>
+        </div>
+        <!--start Training > Week section-->
+        <ul class="list-normal list-training" data-role="listview">
+            <li>
+                <a ng-click="toggle1=!toggle1">
+                    <h3>I am Attending </h3>
+                </a>
+
+                <div ng-show="toggle1" class="animate-hide">
+                    <label class="no-records" ng-show="attending.length==0">-- No records --</label>
+
+                    <div ng-repeat="evt in attending">
+
+                        <a ng-click="clickToggle($index,0)"
+                           class="list-header ng-class:rotate[0][$index]">
+                            <div class="text-orange list-title"> {{evt.course_name}}</div>
+                            <div class="list-date">{{evt.date}}</div>
+                        </a>
+
+                        <div ng-show="toggle_inr[0][$index]"
+                             class="height-fix-1 content-info animate-hide">
+                            <label class="text-orange">Venue:</label>{{evt.venue}}
+                            <label class="text-orange">Time Duration:</label>{{evt.start_time}} to
+                            {{evt.end_time}}
+                            <label class="text-orange">Instructor:</label>{{evt.instructor}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a ng-click="toggle2=!toggle2">
+                    <h3>I have Attended </h3>
+                </a>
+
+                <div ng-show="toggle2" class="animate-hide">
+                    <label class="no-records" ng-show="attended.length==0">-- No records --</label>
+
+                    <div ng-repeat="event in attended">
+                        <a ng-click="clickToggle($index,1)"
+                           class="list-header ng-class:rotate[1][$index]">
+                            <span class="text-orange list-title"> {{event.course_name}} </span>
+                            <span class="list-date">{{event.date}}</span>
+                        </a>
+
+                        <div ng-show="toggle_inr[1][$index]"
+                             class="height-fix-1 content-info animate-hide">
+                            <label class="text-orange">Venue:</label>{{event.venue}}
+                            <label class="text-orange">Date:</label>{{event.date}}
+                            <label class="text-orange">Instructor:</label>{{event.instructor}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a ng-click="toggle3=!toggle3">
+                    <h3>I am Teaching </h3>
+                </a>
+
+                <div ng-show="toggle3" class="animate-hide">
+                    <label class="no-records" ng-show="teaching.length==0">-- No records --</label>
+
+                    <div ng-repeat="evt in teaching">
+                        <a ng-click="clickToggle($index,2)"
+                           class="list-header ng-class:rotate[2][$index]">
+                            <span class="text-orange list-title"> {{evt.course_name}} </span>
+                            <span class="list-date">{{evt.date}}</span>
+                        </a>
+
+                        <div ng-show="toggle_inr[2][$index]"
+                             class="height-fix-1 content-info animate-hide">
+                            <label class="text-orange">Venue:</label>{{evt.venue}}
+                            <label class="text-orange">Time Duration:</label>{{evt.start_time}} to
+                            {{evt.end_time}}
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a ng-click="toggle4=!toggle4">
+                    <h3>I have Taught </h3>
+                </a>
+
+                <div ng-show="toggle4" class="animate-hide">
+                    <label class="no-records" ng-show="taught.length==0">-- No records --</label>
+
+                    <div ng-repeat="event in taught">
+                        <a ng-click="clickToggle($index,3)"
+                           class="list-header ng-class:rotate[3][$index]">
+                            <div class="text-orange list-title"> {{event.course_name}}</div>
+                            <span class="list-date">{{event.date}}</span>
+                        </a>
+
+                        <div ng-show="toggle_inr[3][$index]"
+                             class="height-fix-1 content-info animate-hide">
+                            <label class="text-orange">Venue:</label>{{event.venue}}
+                            <label class="text-orange">Date:</label>{{event.date}}
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div id="tab-content-3" class="tab-content no-padding-all"> <!--Add Training Tab-->
+    <div class="tab-content inr-tab-content inr-current no-padding-all">
+        <div class="preloader">
+            <div class="status">
+                <p class="txt-center">Loading Training Content...</p>
+            </div>
+        </div>
+        <div class="padding-10">
+            <div class="contentform">
+                <div class="contentform-inr">
+                    <div class="row">
+                        <label for="title">Course Title *</label>
+                        <input type="text" id="title" ng-model="trainingForm.title"
+                               placeholder="Course Title">
+
+                    </div>
+                    <div class="row">
+                        <label for="description">Description *</label>
+                        <textarea id="description" class="inputbox" ng-model="trainingForm.description"
+                                  ng-bind=" "></textarea>
+                    </div>
+
+                    <div class="row">
+                        <label>Date *</label>
+
+                        <div class="dateWrapper"><input type="text" class="datepicker datepickerSingle"
+                                                        placeholder="dd-mm-yy"
+                                                        readonly="true"
+                                                        ng-model="trainingForm.date">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>Start Time *</label>
+
+                        <div class="timeWrapper">
+                            <input type="text" class="timepicker timepickerStart" placeholder="hh:mm AA"
+                                   readonly="true" ng-model="trainingForm.start_time">
+                        </div>
+
+                        <div class="start_time"></div>
+                    </div>
+                    <div class="row">
+                        <label>End Time *</label>
+
+                        <div class="timeWrapper">
+                            <input type="text" class="timepicker timepickerEnd" placeholder="hh:mm AA"
+                                   readonly="true" ng-model="trainingForm.end_time">
+                        </div>
+
+                        <div class="start_time"></div>
+                    </div>
+                    <div class="row">
+                        <label for="instructor">Instructor *</label>
+                        <select id="instructor" class="inputbox" ng-model="trainingForm.instructor">
+                            <option ng-repeat="ins in instructors_list"
+                                    value="{{ins.emp_number}}">
+                                {{ins.instructor}}
+                            </option>
+                        </select>
+
+                    </div>
+                    <div class="row">
+                        <label for="Venue">Venue *</label>
+                        <select id="Venue" class="inputbox" ng-model="trainingForm.venue">
+                            <option ng-repeat="evt in course_venue"
+                                    value="{{evt.trn_venue_id}}">
+                                {{evt.title}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="raw">
+                        <button class="button orange radius" ng-click="addTraining()">Apply Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+</div>
+<script src="js/pushy.js"></script>
+<script src="js/custom.js"></script>
+<script type="text/javascript" src="js/jquery.calendario.js"></script>
+<script type="text/javascript" src="js/calendar.js"></script>
+<script src="js/jquery.blockUI.js"></script>
+

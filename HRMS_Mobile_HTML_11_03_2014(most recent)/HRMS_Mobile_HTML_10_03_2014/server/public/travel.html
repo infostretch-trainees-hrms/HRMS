@@ -1,0 +1,194 @@
+<div id="wrapper">
+
+    <aside class="pushy pushy-left">
+        <h2>Quick Links</h2>
+        <ul class="list-normal">
+            <li><a href="#/home" class="shwoleft">Home</a></li>
+            <li><a href="#/contacts" class="shwoleft">Contacts</a></li>
+            <li><a href="#/leave" class="shwoleft">Leave</a></li>
+            <li class="active-link"><a href=""><strong>Travel</strong></a></li>
+            <li><a href="#/training" class="shwoleft">Training</a></li>
+            <li><a href="#/jira" class="shwoleft">JIRA</a></li>
+            <li><a href="#" class="shwoleft" ng-click="logout()">Logout</a></li>
+        </ul>
+    </aside>
+
+    <div class="site-overlay"></div>
+
+    <div id="innerWrapper">
+
+        <header>
+            <div class="content">
+                <a class="menu-btn icons icon-area icon-bars float-lt shwoleft"></a>
+
+
+                <h1>Travel</h1>
+            </div>
+        </header>
+        <section class="container">
+
+
+            <div class="container tab-container" ng-controller="travelCtrl">
+                <ul class="tabs">
+                    <li class="tab-link one-third-nm last-column ng-class:[disabled, current3]" ng-click="loadGrantList()"data-tab="tab-content-3">Grant Request</li>
+                    <li class="tab-link one-third-nm current ng-class:[adminDisabled, current1]" ng-click="loadSummary()" data-tab="tab-content-1">
+                        Summary
+                    </li>
+                    <li class="tab-link one-third-nm ng-class:adminDisabled" data-tab="tab-content-2">Add Request</li>
+
+                </ul>
+
+                <div id="tab-content-1" class="tab-content tab-content-full no-padding-all ng-class:current1"> <!-- summary-->
+                    <div class="preloader">
+                        <div class="status">
+                            <p class="txt-center">Loading Travel Summary Content...</p>
+                        </div>
+                    </div>
+                    <div class="padding-10">
+                        <div class="contentform">
+                            <div class="contentform-inr">
+                                <div class="row">
+                                    <label for="travelStatus">travel status *</label>
+                                    <select id="travelStatus" class="inputbox" ng-model="travelStatus">
+                                        <option value="All" selected>All</option>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Accepted">Accepted</option>
+                                        <option value="Rejected">Rejected</option>
+                                        <option value="Cancelled">cancelled</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-normal list-contact">
+                        <li ng-repeat="evt in filteredList = (travelSummary | searchForTravel:travelStatus)">
+                            <a ng-click="clickToggle($index)" class="list-header ng-class:rotate[$index]"><h3>{{evt.location_from}} to
+                                {{evt.location_to}}</h3></a>
+                            <div ng-show="toggle[$index]" class="height-fix-2 content-info animate-hide">
+                                <label>Duration: {{evt.start_date}} to {{evt.end_date}}</label>
+                                <label>Type: {{evt.travel_type}}</label>
+                                <label>Mode: {{evt.mode_of_travel}}</label>
+                                <label ng-show="evt.status=='Pending'">Status: <strong
+                                        style="color: #0059bc">Pending</strong></label>
+                                <label ng-show="evt.status=='Accepted'">Status: <strong
+                                        class="text-green-dark">Accepted</strong></label>
+                                <label ng-show="evt.status=='Rejected'">Status: <strong
+                                        style="color:orangered">Rejected</strong></label>
+                                <label style="color: #000000" ng-show="evt.status=='Cancelled'">Status: <strong
+                                        style="color: #000000">Cancelled</strong></label>
+                            </div>
+                        </li>
+                    </ul>
+                    <label class="no-records" ng-show="!filteredList.length">No records</label>
+                </div>
+                <div id="tab-content-2" class="tab-content">
+                    <div class="preloader">
+                        <div class="status">
+                            <p class="txt-center">Adding Travel Request...</p>
+                        </div>
+                    </div>
+                    <div class="contentform">
+                        <div class="contentform-inr">
+                            <div class="row">
+                                <label for="PoT">Purpose of Travel *</label>
+                                <input type="text" id="PoT" ng-model="purpose_of_travel"
+                                       placeholder="type purpose of travel">
+                            </div>
+                            <div class="row">
+                                <label for="Ttype">Travel type *</label>
+                                <select id="Ttype" class="inputbox" ng-model="travel_type">
+                                    <option value="Business">Business</option>
+                                    <option value="Transfer">Transfer</option>
+                                    <option value="Personal">Personal</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label>Start Date *</label>
+                                <div class="dateWrapper"><input type="text" class="datepicker datepickerStart"
+                                                                placeholder="dd-mm-yy"
+                                                                readonly="true"
+                                                                ng-model="start_date">
+
+
+                            </div>
+                                </div>
+                            <div class="row">
+                                <label>End Date *</label>
+
+                                    <div class="dateWrapper"><input type="text" class="datepicker datepickerEnd"
+                                                                    placeholder="dd-mm-yy"
+                                                                    readonly="true"
+                                                                    ng-model="end_date">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="Jfrom">Journey from *</label>
+                                <select id="Jfrom" class="inputbox" ng-model="location_from">
+                                    <option ng-repeat="evt in travelLocations" value="{{evt.title}}">{{evt.title}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label for="Jto">Journey to *</label>
+                                <select id="Jto" class="inputbox" ng-model="location_to">
+                                    <option ng-repeat="evt in travelLocations" value="{{evt.title}}">{{evt.title}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label for="MoT">Mode of Travel *</label>
+                                <select id="MoT" class="inputbox" ng-model="mode_of_travel">
+                                    <option value="Air Economy">Air Economy</option>
+                                    <option value="1st AC Rail">1st AC Rail</option>
+                                    <option value="2nd AC Rail">2nd AC Rail</option>
+                                    <option value="3rd AC Rail">3rd AC Rail</option>
+                                    <option value="Private Taxi">Private Taxi</option>
+                                    <option value="AC Bus">AC Bus</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <label for="cab">Cab Booking required </label>
+                                <input type="checkbox" id="cab" ng-model="cab" value="false">
+                            </div>
+                            <div class="row">
+                                <label for="hotel">Hotel Booking required </label>
+                                <input type="checkbox" class="inputbox" id="hotel" ng-model="hotel" value="false">
+                            </div>
+                            <div class="row" ng-cloak>
+                                <label for="Extrainfo">Extra Information</label>
+                                <textarea id="Extrainfo" class="inputbox" ng-model="extra_info" ng-bind=" "></textarea>
+                            </div>
+                            <div class="raw">
+                                <button class="button orange radius" ng-click="travelApply()">Apply Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-content-3" class="tab-content no-padding-all ng-class:current3">
+                    <div class="preloader">
+                        <div class="status">
+                            <p class="txt-center">Loading Grant List Content...</p>
+                        </div>
+                    </div>
+                    <ul class="list-normal list-contact">
+                        <li ng-repeat="evt in travelGrantList">
+                            <a ng-click="clickToggle($index)" class="list-header ng-class:rotate[$index]"><h3>{{evt.emp_name}}</h3></a>
+                            <div ng-show="toggle[$index]" class="height-fix-1 content-info animate-hide">
+                                <label>Duration: {{evt.start_date}} to {{evt.end_date}}</label>
+                                <label>Type: {{evt.travel_type}}</label>
+                                <label>Mode: {{evt.mode_of_travel}}</label>
+                                <label>Journey: {{evt.location_from}} to {{evt.location_to}}</label>
+                                <button class="button orange" ng-click="grantTravel(evt.trvl_travel_request_id)">Grant</button>
+                                <button class="button orange" ng-click="rejectTravel(evt.trvl_travel_request_id)">Reject</button>
+                            </div>
+                        </li>
+                    </ul>
+                    <label class="no-records" ng-show="!travelGrantList.length">No grant requests</label>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+<script src="js/pushy.js"></script>
+<script src="js/custom.js"></script>

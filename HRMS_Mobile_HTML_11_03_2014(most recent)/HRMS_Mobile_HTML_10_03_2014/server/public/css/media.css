@@ -1,0 +1,118 @@
+/* -------------------------------------------------- 
+ This file has a mobile-to-tablet, and tablet-to-desktop breakpoint
+-----------------------------------------------------*/
+
+
+@media only screen and (width: 320px){
+	
+	header h1,	h1#logo a,	h1 a.minTitle { width: 80%;}
+	
+	
+	.contentform label, .contentform input, .contentform textarea, .contentform select{ /*float:none;*/}
+	
+	.contentform label {margin-bottom:4px;}
+	.contentform input, .contentform textarea, .contentform select{ width:85%;}
+	.contentform button {left:auto; margin:0 auto;}
+}
+
+@media only screen and (width: 480px){
+		
+
+}
+
+
+@media only screen and (width: 640px){
+	
+	.contentform .row {margin-bottom:20px}
+	
+	/*FONT SIZE*/
+	
+	h1{
+		font-size: 28px;
+		margin:0 0 1.5em 0;
+	}
+	h2{
+		font-size: 24px;
+		margin:0 0 .3em 0;
+	}
+	h3{
+		font-size: 22px;
+		margin:0 0 .4em 0;
+	}
+	h4{
+		font-size: 18px;
+	}
+	h5, h6{
+		font-size: 14px;
+	}
+	
+	
+	p, 
+	.contentform label,	
+	.contentform input, 
+	.contentform textarea,
+	.contentform select,
+	.button,
+	.pushy li,
+	ul.inr-tabs li{font-size:18px;}
+
+	
+	.button.radius {
+		-webkit-border-radius: 7px; 
+		-moz-border-radius: 7px; 
+		border-radius: 7px;
+	}
+	
+	
+	header h1{
+		font-size: 30px;
+		margin:0;
+		line-height:44px;
+	}
+	/*ICONS*/
+	
+	.icons  {background: url(../images/icons_x2.png) -5000px -5000px no-repeat; cursor:pointer}
+	.icon-area { display:block;  width:50px; height:50px; overflow:hidden }
+	.icons.icon-bars {background-position:0px 0px;}
+	.icons.icon-settings {background-position:-50px 0px}
+	.icons.icon-calander {background-position:-100px 0px}
+	
+	/*PADDING 15*/
+	header .content, 
+	.contentform, 
+	.contentform-inr,	
+	.tab-content, 
+	.inr-tab-content{ padding:15px;}
+	
+	
+	.contentform label { width:150px;  margin-top:7px;}
+	.contentform input, 
+	.contentform textarea,
+	.contentform select{ width:300px; height:50px; font-size:18px; border-width:3px;}	
+	.contentform textarea {height:100px;}
+	.contentform button {left:150px;}
+	
+	.button {padding:15px 25px;}
+	
+	/*TABS*/
+	ul.tabs li { font-size:22px; padding:15px 0px;}
+	ul.inr-tabs{height:40px; }
+	ul.inr-tabs li {padding: 10px 7px;height:40px;}
+	.pushy h2{font-size:22px;}
+	
+	/*TRAINING */
+	ul.list-training h3{ font-size:20px; margin-bottom:10px;}
+	ul.list-training p{ margin-bottom:8px; }
+	ul.list-training li a{padding:15px 70px 15px 15px; background:#fff url(../images/icon_arrow_x2.png) 97.5% center no-repeat; }
+	
+}
+
+@media only screen and (min-width: 960px){
+	
+}
+
+
+@media only screen and (min-width: 1024px){
+	
+	
+}

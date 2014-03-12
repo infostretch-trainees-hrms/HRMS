@@ -1,0 +1,56 @@
+
+<div id="wrapper">
+        <aside class="pushy pushy-left">
+        	<h2>Quick Links</h2>
+            <ul class="list-normal">
+            	<li class="active-link"><a class="shwoleft" href=""><strong>Home</strong></a></li>
+                <li><a href="#/contacts" class="shwoleft">Contacts</a> </li>
+                <li><a href="#/leave"  class="shwoleft">Leave</a> </li>
+                <li><a href="#/travel"  class="shwoleft">Travel</a> </li>
+                <li><a href="#/training" class="shwoleft">Training</a> </li>
+                <li><a href="#/jira"  class="shwoleft">JIRA</a> </li>
+                <li><a href="#"  class="shwoleft" ng-click="logout()">Logout</a> </li>
+            </ul>            
+        </aside>
+        
+        <div class="site-overlay"></div>
+        
+        <div id="innerWrapper">
+            
+            <header>
+                <div class="content">
+                    <a class="menu-btn icons icon-area icon-bars float-lt shwoleft"></a>
+                    <h1>Home</h1>
+                </div>
+            </header>
+            
+            <section class="container tab-container" ng-controller="infoCtrl">
+                <div class="preloader">
+                    <div class="status">
+                        <p class="txt-center">Loading Home Content...</p>
+                    </div>
+                </div>
+                <div class="home-content">
+
+                       <div class="txt-center"> <img ng-src="{{info[0].epic_picture}}" alt="picture"/> </div>
+
+                        <label class="text-orange">{{info[0].emp_firstname}} {{info[0].emp_lastname}}</label>
+                        <label>Birthdate: {{info[0].emp_birthday | date:'dd/MM/yyyy'}}</label>
+                        <label>Designation: {{info[0].emp_designation}}</label>
+                        <label>Skills: <label class="no-block" ng-repeat="skill in info">{{skill.name}}{{$last ? '.' : ', '}}</label></label>
+                        <label>Years of Experience: {{info[0].years_of_exp}}</label>
+
+                </div>
+                        
+            	
+            </section>                  
+        </div>
+        
+        
+	</div>    
+
+     <!-- Pushy JS -->
+     <script src="js/pushy.js"></script>
+    <!-- <script src="js/custom.js"></script>-->
+     <script src="scripts/infoCtrl.js"></script>
+

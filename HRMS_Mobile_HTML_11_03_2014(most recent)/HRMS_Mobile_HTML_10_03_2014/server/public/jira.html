@@ -1,0 +1,53 @@
+
+<div id="wrapper">
+    <aside class="pushy pushy-left">
+        <h2>Quick Links</h2>
+        <ul class="list-normal">
+            <li><a  href="#/home">Home</a></li>
+            <li><a href="#/contacts">Contacts</a> </li>
+            <li><a href="#/leave">Leave</a> </li>
+            <li><a href="#/travel">Travel</a> </li>
+            <li><a href="#/training">Training</a> </li>
+            <li  class="active-link"><a href=""><strong>JIRA</strong></a> </li>
+            <li><a href="#" ng-click="logout()">Logout</a> </li>
+        </ul>
+    </aside>
+
+    <div class="site-overlay"></div>
+    <div id="innerWrapper">
+
+        <header>
+            <div class="content">
+                <a class="menu-btn icons icon-area icon-bars float-lt shwoleft"></a>
+                <h1>JIRA</h1>
+            </div>
+        </header>
+
+        <section class="container" ng-controller="ContactsCtrl">
+
+            <div class="content tab-container no-padding-all">
+                    <div id="tab-content-1" class="tab-content current no-padding-all">
+                        <!-- <div class="clear"></div> -->
+                        <div id="tab-content-4" class="tab-content inr-tab-content inr-current no-padding-all">
+                            <!--start Training > Week section-->
+                            <ul class="list-normal list-training" data-role="listview">
+                                <li ng-repeat="activity in activityLog">
+                                    <a href="">
+                                        <h3>Name:{{activity.name}} </h3>
+                                        <p>desig:{{activity.desig}}</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Pushy JS -->
+<script src="js/pushy.js"></script>
+<!-- <script src="js/custom.js"></script>-->
+
+
