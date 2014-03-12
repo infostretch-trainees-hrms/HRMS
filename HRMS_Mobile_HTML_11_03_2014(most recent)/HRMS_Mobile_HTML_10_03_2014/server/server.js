@@ -12,6 +12,7 @@ var connection = mysql.createConnection(
 //ishant
 connection.connect();
 console.log("DB connected");
+console.log("port: " + process.env.OPENSHIFT_NODEJS_PORT + "host: " +process.env.OPENSHIFT_NODEJS_IP );
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 app.configure(function() {
