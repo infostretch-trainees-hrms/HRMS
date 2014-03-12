@@ -13,6 +13,7 @@ var connection = mysql.createConnection(
 connection.connect();
 console.log("DB connected");
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var ip = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 app.configure(function() {
     app.use(express.bodyParser());
     app.use(express.static(__dirname + '/public/'));
@@ -403,5 +404,5 @@ app.post('/travelRequestForm',function(req,res){
         res.json(result);
     });
 });
-app.listen(port);
+app.listen(port, ip);
 console.log("App listening on port " + port);
