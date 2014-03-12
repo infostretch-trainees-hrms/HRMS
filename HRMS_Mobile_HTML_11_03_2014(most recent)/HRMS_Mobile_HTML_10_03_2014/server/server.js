@@ -12,7 +12,7 @@ var connection = mysql.createConnection(
 //ishant
 connection.connect();
 console.log("DB connected");
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 15002;
 app.configure(function() {
     app.use(express.bodyParser());
     app.use(express.static(__dirname + '/public/'));
