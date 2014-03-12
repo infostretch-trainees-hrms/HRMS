@@ -12,7 +12,7 @@ var connection = mysql.createConnection(
 //ishant
 connection.connect();
 console.log("DB connected");
-var port = process.env.PORT || 27017;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 app.configure(function() {
     app.use(express.bodyParser());
     app.use(express.static(__dirname + '/public/'));
