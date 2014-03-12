@@ -9,6 +9,7 @@ var connection = mysql.createConnection(
         database: 'openhrms',
         port: '3306'
     });
+//ishant
 connection.connect();
 console.log("DB connected");
 var port = process.env.PORT || 8080;
