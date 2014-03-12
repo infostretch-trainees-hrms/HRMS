@@ -406,4 +406,4 @@ app.post('/travelRequestForm',function(req,res){
     });
 });
 app.listen(port, ip);
-console.log("App listening on port " + port);
+console.log("App listening on port " + port + ip);
